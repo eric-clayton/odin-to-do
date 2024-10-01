@@ -40,7 +40,7 @@ body {
 #user {
   font-weight: bold;
 }
-.add-task {
+.add-task-button {
 	display: flex;
 	gap: var(--sidebar-horizontal-gap)
 }
