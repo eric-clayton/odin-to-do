@@ -1,0 +1,78 @@
+@import url("reset.css");
+:root {
+  --red: #de4c4a;
+  --red-hover:#de4c4a23;
+  --red-selected: #de4c4a73;
+  --accent-grey: #262626;
+  --primary-grey: #1e1e1e;
+  --font-family-group: -apple-system,system-ui,"Segoe UI",Roboto,Noto,Oxygen-Sans,Ubuntu,Cantrell,"Helvetica Neue",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+body {
+  background-color: var(--primary-grey);
+  color: white;
+  font-family: var(--font-family-group);
+  display: grid;
+  grid-template-columns: 270px 1fr;
+}
+.sidebar {
+	--sidebar-horizontal-gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: var(--accent-grey);
+  padding: 1rem;
+}
+.sidebar img{
+	width: 1.5rem;
+	height: 1.5rem;
+}
+.user-container {
+  display: flex;
+  align-items: center;
+  gap: var(--sidebar-horizontal-gap);
+}
+#pfp {
+  width: 2rem;
+  height: 2rem;
+  background-color:grey;
+  border-radius: 50%;
+}
+#user {
+  font-weight: bold;
+}
+.add-task {
+	display: flex;
+	gap: var(--sidebar-horizontal-gap)
+}
+.nav-list {
+	margin: 0;
+	padding: 0;
+}
+.nav-list li{
+	display: flex;
+	align-items: center;
+	gap: var(--sidebar-horizontal-gap);
+	margin-bottom: 1rem;
+}
+.projects-header {
+	display: flex;
+	gap: var(--sidebar-horizontal-gap);
+	align-items: center;
+}
+.projects-header h2 {
+	font-size: 1rem;
+}
+[role="button"] {
+	padding: .1rem;
+	border-radius: 20px;
+	cursor: pointer;
+}
+[role="button"]:hover {
+	background-color: var(--red-hover);
+}
+dialog {
+  padding: 0;
+}
+.dialog-container {
+  padding: 1rem;
+}
