@@ -4,6 +4,12 @@ import allTasksSvg from "./images/tasks-all-svgrepo-com.svg";
 import todayTasksSvg from "./images/today-svgrepo-com.svg";
 import addProjectSvg from "./images/plus-large-svgrepo-com.svg";
 
+function createElementAndText(name, tag) {
+    const element = document.createElement(tag);
+    element.innerText = name;
+    return element;
+}
+
 const body = document.querySelector("body");
 body.innerHTML = `
     <div class="sidebar">
@@ -29,15 +35,16 @@ body.innerHTML = `
         </nav>
         <div class="projects-header">
             <h2>My Projects</h2>
-            <img src=${addProjectSvg} role="button">
+            <img src=${addProjectSvg} role="button" class="add-project-button">
         </div>
-        <ul role="list" id="project-list">
+        <ul role="list" class="project-list">
         </ul>
+
     </div>
     <main>
     </main>
     <dialog>
-	    <div class="dialog-container">
+        <div class="dialog-container">
             <form>
                 <label for="title">Title: </label>
                 <input id="title" type="text">
@@ -47,19 +54,22 @@ body.innerHTML = `
                 <input id="dueDate" type="date">
                 <label for="priority">Priority</label>
                 <select name="priority" id="priority">
-                  <option value="low">Low Priority</option>
-                  <option value="medium">Medium Priority</option>
-                  <option value="high">High Priority</option>
+                <option value="low">Low Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="high">High Priority</option>
                 </select>
                 <label for="project-select">Project</label>
                 <select id="project-select" name="project-select">
                 </select>
             </form>
-            <button id="cancel-add-task">Cancel</button>
-		</div>
+            <button class="cancel-add-task">Cancel</button>
+        </div>
     </dialog>
 `;
-const projectList = body.querySelector('#project-list');
+const sidebar = document.querySelector('.sidebar');
+const dialog = body.querySelector('dialog');
+
+const projectList = sidebar.querySelector('.project-list');
 const projects = [];
 function addProject(name) {
     projects.push(createProject(name));
@@ -74,17 +84,13 @@ function createProject(name) {
 }
 addProject('Default');
 
-const addTaskButton = body.querySelector(".add-task");
-const dialog = body.querySelector("dialog");
+const addTaskButton = sidebar.querySelector(".add-task");
 addTaskButton.addEventListener("click", () => {
   dialog.showModal();
 });
-const cancelAddTask = dialog.querySelector("#cancel-add-task");
-cancelAddTask.addEventListener("click", () => {
-  dialog.close();
-});
+const cancelAddTask = dialog.querySelector(".cancel-add-task");
 dialog.addEventListener("click", (e) => {
-  if (e.target == dialog) {
+  if (e.target === dialog || e.target === cancelAddTask) {
     dialog.close();
   }
 });
@@ -95,11 +101,7 @@ for (let project of projects) {
 
     projectSelect.appendChild(createElementAndText(project.name, 'option'));
 }
-function createElementAndText(name, tag) {
-    const element = document.createElement(tag);
-    element.innerText = name;
-    return element;
-}
 
+const addProjectButton = sidebar.querySelector('.add-project-button');
 
 
