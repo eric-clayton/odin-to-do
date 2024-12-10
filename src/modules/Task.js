@@ -5,6 +5,7 @@ export default class Task {
     this.priority = priority;
     this.dueDate = dueDate;
     this.project = project;
+    this.completed = false;
     this.element = this.createTaskElement();
   }
   createTaskElement() {
@@ -14,7 +15,6 @@ export default class Task {
                 <input type="checkbox" id="${this.title}>
                 <label for="${this.title}">${this.title}</label>
         `;
-    taskElement.addEventListener("click", () => {});
     return taskElement;
   }
 }
