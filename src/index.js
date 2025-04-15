@@ -200,7 +200,8 @@ export function bindDialog(
   const submitButton = dialog.querySelector('[type="submit"]');
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
-    submitFunction(nameElements);
+    submitFunction(nameElements, dialog);
+		nameElements.forEach(el => el.value = "");
     dialog.close();
   });
 }
@@ -213,6 +214,14 @@ function renderTasks() {
     task.element.dataset.index = index;
     tasksContainer.appendChild(task.element);
   }
+}
+function createTaskElement(task) {
+  const taskElement = document.createElement("div");
+  taskElement.className = "task-container";
+  taskElement.innerHTML = `
+		<input type="checkbox" id="${task.title} value="${task.completed}>
+		<label for="${task.title}">${task.title}</label>`;
+  return taskElement;
 }
 function renderProjects() {
   const dependentElements = [
@@ -247,7 +256,12 @@ function addTaskSubmit(nameElements) {
   Projects.activeProject.addTask(new Task(...args, Projects.activeProject));
   renderTasks();
 }
-function saveTaskSubmit() {}
+function saveTaskSubmit(nameElements, dialog) {
+  for (const element of nameElements) {
+		Projects.activeProject.getTasks()[dialog.dataset.index][element.name] = element.value;
+	}
+	renderTasks();
+}
 initializeDOM();
 cacheElements();
 bindEvents();
